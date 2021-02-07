@@ -83,7 +83,7 @@ public class Plane {
                 ", plate='" + plate + '\'' +
                 ", maker='" + maker + '\'' +
                 ", model='" + model + '\'' +
-                ", flightHours=" + flightHours +
+                ", flightHours=" + flightHours.toHours() + 'h' +
                 '}';
     }
 }
