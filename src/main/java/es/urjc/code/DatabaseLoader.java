@@ -1,5 +1,6 @@
 package es.urjc.code;
 
+import es.urjc.code.dtos.FlightCodeCompanyDTO;
 import es.urjc.code.dtos.MechanicNameSurnameDTO;
 import es.urjc.code.dtos.PlaneMechanicDTO;
 import es.urjc.code.dtos.PlaneMechanicsListDTO;
@@ -53,8 +54,10 @@ public class DatabaseLoader implements CommandLineRunner {
 
         Airport mad = new Airport("MAD", "Barajas", "Madrid", "Spain");
         Airport muc = new Airport("MUC", "Franz Josef Strauss", "Munich", "Germany");
+        Airport bcn = new Airport("BCN", "El prat", "Barcelona", "Spain");
         airportRepository.save(mad);
         airportRepository.save(muc);
+        airportRepository.save(bcn);
 
         CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
         CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
@@ -68,9 +71,24 @@ public class DatabaseLoader implements CommandLineRunner {
         mechanicRepository.save(m2);
         mechanicRepository.save(m3);
 
-        Flight f1 = new Flight("LH9851", " Lufthansa ", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(35));
+        Flight f1 = new Flight("LH4323", "Lufthansa", p1, muc, mad, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(12));
+        Flight f2 = new Flight("IB9851", "Iberia", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 19, 06, 30), Duration.ofHours(2).plusMinutes(35));
+        Flight f3 = new Flight("LH5892", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 12, 30), Duration.ofHours(2).plusMinutes(56));
+        Flight f4 = new Flight("UX3633", "Air Europa", p1, bcn, muc, LocalDateTime.of(2016, Month.APRIL, 20, 18, 00), Duration.ofHours(1).plusMinutes(48));
+        Flight f5 = new Flight("LH2564", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 07, 30), Duration.ofHours(2).plusMinutes(3));
+        Flight f6 = new Flight("LH3855", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 21, 06, 30), Duration.ofHours(2).plusMinutes(23));
         f1.setCrew(Arrays.asList(c1, c2));
+        f2.setCrew(Arrays.asList(c1, c2));
+        f3.setCrew(Arrays.asList(c1, c2));
+        f4.setCrew(Arrays.asList(c1, c2));
+        f5.setCrew(Arrays.asList(c1, c2));
+        f6.setCrew(Arrays.asList(c1, c2));
         flightRepository.save(f1);
+        flightRepository.save(f2);
+        flightRepository.save(f3);
+        flightRepository.save(f4);
+        flightRepository.save(f5);
+        flightRepository.save(f6);
 
         Review r1 = new Review(p1, LocalDate.of(2012, Month.FEBRUARY, 15), LocalDate.of(2012, Month.FEBRUARY, 17), Duration.ofHours(43), m1, "yearly review", "normal yearly review", muc);
         Review r2 = new Review(p2, LocalDate.of(2015, Month.MARCH, 8), LocalDate.of(2015, Month.MARCH, 12), Duration.ofHours(23), m2, "avionic review", "yearly avionic review", mad);
@@ -144,9 +162,13 @@ public class DatabaseLoader implements CommandLineRunner {
             }
             planeMechanicsListDTOS.get(planeMechanicDTO.getPlate()).addMechanic(mechanic);
         });
-
         printData(planeMechanicsListDTOS);
 
+        // Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora.
+        List<FlightCodeCompanyDTO> flightCodeCompanyDTOS = flightRepository.findFlightsLandedInCityAndDate("Munich", "2016-04-20");
+        System.out.println("Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora:");
+        System.out.println("----------------------------------------");
+        printData(flightCodeCompanyDTOS);
 
     }
 

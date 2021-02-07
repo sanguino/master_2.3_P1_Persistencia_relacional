@@ -33,7 +33,7 @@ public class Flight {
 
     private Duration duration;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<CrewMember> crew;
 
 
@@ -133,7 +133,7 @@ public class Flight {
                 ", originAirport=" + originAirport +
                 ", destinationAirport=" + destinationAirport +
                 ", departureDateTime=" + departureDateTime.format(DateTimeFormatter.ISO_DATE_TIME) +
-                ", duration=" +  + duration.toHours() + "h " + duration.toMinutesPart() + "m" +
+                ", duration=" + duration.toHours() + "h " + duration.toMinutesPart() + "m" +
                 ", crew=" + crew +
                 '}';
     }
