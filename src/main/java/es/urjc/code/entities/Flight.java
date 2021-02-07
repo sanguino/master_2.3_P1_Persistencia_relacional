@@ -19,20 +19,20 @@ public class Flight {
     private String code;
     private String company;
 
-    @OneToOne(cascade=CascadeType.ALL)//, mappedBy="flight")
+    @OneToOne //(cascade=CascadeType.ALL)//, mappedBy="flight")
     private Plane plane;
 
-    @OneToOne(cascade=CascadeType.ALL)//, mappedBy="flight")
+    @OneToOne //(cascade=CascadeType.ALL)//, mappedBy="flight")
     private Airport originAirport;
 
-    @OneToOne(cascade=CascadeType.ALL)//), mappedBy="flight")
-    private Plane destinationAirport;
+    @OneToOne //(cascade=CascadeType.ALL)//), mappedBy="flight")
+    private Airport destinationAirport;
 
     private LocalDateTime departureDateTime;
 
     private Duration duration;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<CrewMember> crew;
 
 
@@ -40,7 +40,7 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String code, String company, Plane plane, Airport originAirport, Plane destinationAirport, LocalDateTime departureDateTime, Duration duration) {
+    public Flight(String code, String company, Plane plane, Airport originAirport, Airport destinationAirport, LocalDateTime departureDateTime, Duration duration) {
         this.code = code;
         this.company = company;
         this.plane = plane;
@@ -90,11 +90,11 @@ public class Flight {
         this.originAirport = originAirport;
     }
 
-    public Plane getDestinationAirport() {
+    public Airport getDestinationAirport() {
         return destinationAirport;
     }
 
-    public void setDestinationAirport(Plane destinationAirport) {
+    public void setDestinationAirport(Airport destinationAirport) {
         this.destinationAirport = destinationAirport;
     }
 
