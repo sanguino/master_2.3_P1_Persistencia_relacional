@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -125,9 +126,9 @@ public class Review {
         return "Review{" +
                 "id=" + id +
                 ", plane=" + plane +
-                ", initDate=" + initDate +
-                ", endDate=" + endDate +
-                ", timeSpent=" + timeSpent +
+                ", initDate=" + initDate.format(DateTimeFormatter.ISO_DATE) +
+                ", endDate=" + endDate.format(DateTimeFormatter.ISO_DATE) +
+                ", timeSpent=" + timeSpent.toHours() + "h " + timeSpent.toMinutesPart() + "m" +
                 ", mechanic=" + mechanic +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +

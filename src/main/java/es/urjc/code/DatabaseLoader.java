@@ -73,11 +73,29 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("Guardado completado");
         System.out.println("");
 
-        // Recupera aviones
+        // Recupera planes
         List<Plane> planes = planeRepository.findAll();
         System.out.println("Planes con findAll():");
         System.out.println("----------------------------------------");
         printData(planes);
+
+        // Recupera aeropuertos
+        List<Airport> airports = airportRepository.findAll();
+        System.out.println("Airports con findAll():");
+        System.out.println("----------------------------------------");
+        printData(airports);
+
+        // Recupera tripulantes
+        List<CrewMember> crew = crewMemberRepository.findAll();
+        System.out.println("Crew con findAll():");
+        System.out.println("----------------------------------------");
+        printData(crew);
+
+        // Recupera mechanics
+        List<Mechanic> mechanics = mechanicRepository.findAll();
+        System.out.println("Mechanics con findAll():");
+        System.out.println("----------------------------------------");
+        printData(mechanics);
 
         // Recupera vuelos
         List<Flight> flights = flightRepository.findAll();

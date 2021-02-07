@@ -3,6 +3,7 @@ package es.urjc.code.entities;
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -131,8 +132,8 @@ public class Flight {
                 ", plane=" + plane +
                 ", originAirport=" + originAirport +
                 ", destinationAirport=" + destinationAirport +
-                ", departureDateTime=" + departureDateTime +
-                ", duration=" + duration +
+                ", departureDateTime=" + departureDateTime.format(DateTimeFormatter.ISO_DATE_TIME) +
+                ", duration=" +  + duration.toHours() + "h " + duration.toMinutesPart() + "m" +
                 ", crew=" + crew +
                 '}';
     }
