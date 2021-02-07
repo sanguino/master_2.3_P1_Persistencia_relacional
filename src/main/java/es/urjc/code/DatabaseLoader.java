@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import java.text.ParseException;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
@@ -36,6 +37,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     private FlightRepository flightRepository;
 
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     @Override
     public void run(String... args) throws ParseException {
 
@@ -61,6 +65,9 @@ public class DatabaseLoader implements CommandLineRunner {
         Flight f1 = new Flight("LH9851", " Lufthansa ", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(35));
         f1.setCrew(Arrays.asList(c1, c2));
         flightRepository.save(f1);
+
+        Review r1 = new Review(p1, LocalDate.of(2015, Month.FEBRUARY, 15), LocalDate.of(2015, Month.FEBRUARY, 12), Duration.ofHours(43), m1, "year review", "normal tear review", muc);
+        reviewRepository.save(r1);
 
         System.out.println("");
         System.out.println("Guardado completado");
