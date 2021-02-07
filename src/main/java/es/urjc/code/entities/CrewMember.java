@@ -1,6 +1,9 @@
 package es.urjc.code.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * Entity Crew.
@@ -14,6 +17,9 @@ public class CrewMember extends Employee{
     private String position;
 
     private String company;
+
+    @OneToMany(mappedBy = "crewMember", orphanRemoval = true)
+    private List<FlightCrew> flights;
 
     public CrewMember() {
         super();
@@ -41,12 +47,21 @@ public class CrewMember extends Employee{
         this.company = company;
     }
 
+    public List<FlightCrew> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<FlightCrew> flights) {
+        this.flights = flights;
+    }
+
     @Override
     public String toString() {
         String employee = super.toString();
         return employee + " Crew{" +
                 "position='" + position + '\'' +
                 ", company='" + company + '\'' +
+                //", flights=" + flights +
                 '}';
     }
 }

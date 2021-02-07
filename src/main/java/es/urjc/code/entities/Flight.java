@@ -33,9 +33,8 @@ public class Flight {
 
     private Duration duration;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<CrewMember> crew;
-
+    @OneToMany(mappedBy = "flight", orphanRemoval = true)
+    private List<FlightCrew> crew;
 
 
     public Flight() {
@@ -115,11 +114,11 @@ public class Flight {
         this.duration = duration;
     }
 
-    public List<CrewMember> getCrew() {
+    public List<FlightCrew> getCrew() {
         return crew;
     }
 
-    public void setCrew(List<CrewMember> crew) {
+    public void setCrew(List<FlightCrew> crew) {
         this.crew = crew;
     }
 
@@ -134,7 +133,7 @@ public class Flight {
                 ", destinationAirport=" + destinationAirport +
                 ", departureDateTime=" + departureDateTime.format(DateTimeFormatter.ISO_DATE_TIME) +
                 ", duration=" + duration.toHours() + "h " + duration.toMinutesPart() + "m" +
-                ", crew=" + crew +
+                //", crew=" + crew +
                 '}';
     }
 }

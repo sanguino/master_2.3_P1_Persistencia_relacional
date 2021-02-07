@@ -59,11 +59,6 @@ public class DatabaseLoader implements CommandLineRunner {
         airportRepository.save(muc);
         airportRepository.save(bcn);
 
-        CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
-        CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
-        crewMemberRepository.save(c1);
-        crewMemberRepository.save(c2);
-
         Mechanic m1 = new Mechanic("hy76rf", "Peter", "Johnson", 2005, "Aeronautical Engineer");
         Mechanic m2 = new Mechanic("rt91lp", "Sandra", "Robbert", 2019, "Engineer");
         Mechanic m3 = new Mechanic("xc20ew", "Ellie", "Peterson", 2012, "Mechanic");
@@ -71,18 +66,32 @@ public class DatabaseLoader implements CommandLineRunner {
         mechanicRepository.save(m2);
         mechanicRepository.save(m3);
 
+        CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
+        CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
+        crewMemberRepository.save(c1);
+        crewMemberRepository.save(c2);
+
         Flight f1 = new Flight("LH4323", "Lufthansa", p1, muc, mad, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(12));
         Flight f2 = new Flight("IB9851", "Iberia", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 19, 06, 30), Duration.ofHours(2).plusMinutes(35));
         Flight f3 = new Flight("LH5892", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 12, 30), Duration.ofHours(2).plusMinutes(56));
         Flight f4 = new Flight("UX3633", "Air Europa", p1, bcn, muc, LocalDateTime.of(2016, Month.APRIL, 20, 18, 00), Duration.ofHours(1).plusMinutes(48));
         Flight f5 = new Flight("LH2564", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 07, 30), Duration.ofHours(2).plusMinutes(3));
         Flight f6 = new Flight("LH3855", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 21, 06, 30), Duration.ofHours(2).plusMinutes(23));
-        f1.setCrew(Arrays.asList(c1, c2));
-        f2.setCrew(Arrays.asList(c1, c2));
-        f3.setCrew(Arrays.asList(c1, c2));
-        f4.setCrew(Arrays.asList(c1, c2));
-        f5.setCrew(Arrays.asList(c1, c2));
-        f6.setCrew(Arrays.asList(c1, c2));
+
+        List<FlightCrew> crewList = new ArrayList<>();
+        FlightCrew fxc1 = new FlightCrew(f1, c1);
+        FlightCrew fxc2 = new FlightCrew(f1, c2);
+
+        crewList.add(fxc1);
+        crewList.add(fxc2);
+
+        f1.setCrew(crewList);
+        f2.setCrew(crewList);
+        f3.setCrew(crewList);
+        f4.setCrew(crewList);
+        f5.setCrew(crewList);
+        f6.setCrew(crewList);
+
         flightRepository.save(f1);
         flightRepository.save(f2);
         flightRepository.save(f3);
@@ -142,20 +151,13 @@ public class DatabaseLoader implements CommandLineRunner {
         printData(reviews);
 
 
-
-
-
-
-
-
-
         // Para cada avión, mostrar el nombre y apellidos de los mecánicos responsables de sus revisiones.
         List<PlaneMechanicDTO> planesMechanic = reviewRepository.findPlaneMechanics();
         System.out.println("Para cada avión, mostrar el nombre y apellidos de los mecánicos responsables de sus revisiones:");
         System.out.println("----------------------------------------");
         Map<String, PlaneMechanicsListDTO> planeMechanicsListDTOS = new HashMap();
 
-        planesMechanic.forEach((PlaneMechanicDTO planeMechanicDTO)-> {
+        planesMechanic.forEach((PlaneMechanicDTO planeMechanicDTO) -> {
             MechanicNameSurnameDTO mechanic = new MechanicNameSurnameDTO(planeMechanicDTO.getMechanicName(), planeMechanicDTO.getMechanicSurName());
             if (!planeMechanicsListDTOS.containsKey(planeMechanicDTO.getPlate())) {
                 planeMechanicsListDTOS.put(planeMechanicDTO.getPlate(), new PlaneMechanicsListDTO(String.format("%s:%s - %s", planeMechanicDTO.getMaker(), planeMechanicDTO.getModel(), planeMechanicDTO.getPlate())));
@@ -164,11 +166,15 @@ public class DatabaseLoader implements CommandLineRunner {
         });
         printData(planeMechanicsListDTOS);
 
+
         // Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora.
         List<FlightCodeCompanyDTO> flightCodeCompanyDTOS = flightRepository.findFlightsLandedInCityAndDate("Munich", "2016-04-20");
         System.out.println("Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora:");
         System.out.println("----------------------------------------");
         printData(flightCodeCompanyDTOS);
+
+
+        // Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó.
 
     }
 
