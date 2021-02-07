@@ -72,7 +72,11 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("----------------------------------------");
         printData(planes);
 
-
+        // Recupera vuelos
+        List<Flight> flights = flightRepository.findAll();
+        System.out.println("Flights con findAll():");
+        System.out.println("----------------------------------------");
+        printData(flights);
     }
 
 
