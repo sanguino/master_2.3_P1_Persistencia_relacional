@@ -84,6 +84,12 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("Flights con findAll():");
         System.out.println("----------------------------------------");
         printData(flights);
+
+        // Recupera reviews
+        List<Review> reviews = reviewRepository.findAll();
+        System.out.println("Reviews con findAll():");
+        System.out.println("----------------------------------------");
+        printData(reviews);
     }
 
 
