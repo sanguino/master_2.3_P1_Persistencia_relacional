@@ -1,13 +1,7 @@
 package es.urjc.code;
 
-import es.urjc.code.entities.Airport;
-import es.urjc.code.entities.CrewMember;
-import es.urjc.code.entities.Flight;
-import es.urjc.code.entities.Plane;
-import es.urjc.code.repositories.AirportRepository;
-import es.urjc.code.repositories.CrewMemberRepository;
-import es.urjc.code.repositories.FlightRepository;
-import es.urjc.code.repositories.PlaneRepository;
+import es.urjc.code.entities.*;
+import es.urjc.code.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
@@ -37,6 +31,9 @@ public class DatabaseLoader implements CommandLineRunner {
     private CrewMemberRepository crewMemberRepository;
 
     @Autowired
+    private MechanicRepository mechanicRepository;
+
+    @Autowired
     private FlightRepository flightRepository;
 
     @Override
@@ -53,10 +50,13 @@ public class DatabaseLoader implements CommandLineRunner {
         airportRepository.save(mad);
         airportRepository.save(muc);
 
-        CrewMember c1 = new CrewMember("hy76rf", "Jonh", "Smith", "Captain", "Lufthansa");
+        CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
         CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
         crewMemberRepository.save(c1);
         crewMemberRepository.save(c2);
+
+        Mechanic m1 = new Mechanic("hy76rf", "Peter", "Johnson", 2005, "Aeronautical Engineer");
+        mechanicRepository.save(m1);
 
         Flight f1 = new Flight("LH9851", " Lufthansa ", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(35));
         f1.setCrew(Arrays.asList(c1, c2));
