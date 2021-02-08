@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Repositorio para Review.
  *
- *  @author Miguel G. Sanguino
+ * @author Miguel G. Sanguino
  */
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 

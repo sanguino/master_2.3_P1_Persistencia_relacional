@@ -1,11 +1,6 @@
 package es.urjc.code.dtos;
 
-import es.urjc.code.entities.Flight;
-import es.urjc.code.entities.FlightCrew;
-
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Miguel G. Sanguino

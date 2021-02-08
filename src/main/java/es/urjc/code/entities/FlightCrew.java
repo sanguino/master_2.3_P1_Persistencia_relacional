@@ -5,6 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+/**
+ * Entity FlightCrew.
+ *
+ * @author Miguel G. Sanguino
+ */
+
 @Entity
 public class FlightCrew {
 
@@ -19,7 +25,8 @@ public class FlightCrew {
     @MapsId("crewMemberId")
     private CrewMember crewMember;
 
-    public FlightCrew() {}
+    public FlightCrew() {
+    }
 
     public FlightCrew(Flight flight, CrewMember crewMember) {
         this.flight = flight;

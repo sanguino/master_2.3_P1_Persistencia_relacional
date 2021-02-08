@@ -1,6 +1,6 @@
 package es.urjc.code.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  * Entity Mechanic.
@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Mechanic extends Employee{
+public class Mechanic extends Employee {
 
     private int hiredYear;
 

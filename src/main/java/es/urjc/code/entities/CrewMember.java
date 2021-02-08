@@ -1,20 +1,18 @@
 package es.urjc.code.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Entity Crew.
+ * Entity CrewMember.
  *
  * @author Miguel G. Sanguino
  */
 
 @Entity
-public class CrewMember extends Employee{
+public class CrewMember extends Employee {
 
     private String position;
 

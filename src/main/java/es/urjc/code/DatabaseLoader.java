@@ -12,12 +12,13 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.*;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Cargador de la BD y ejemplos de consulta.
+ * Cargador de la BD, ejemplos de consulta y consultas de la practica.
  *
  * @author Miguel G. Sanguino
  */
@@ -49,6 +50,7 @@ public class DatabaseLoader implements CommandLineRunner {
     public void run(String... args) throws ParseException {
 
         // Guardando datos ...
+
         Plane p1 = new Plane("EC-FGE", "Airbus", "A320", Duration.ofHours(1452));
         Plane p2 = new Plane("EC-UEF", "Boeing", "747", Duration.ofHours(3452));
         planeRepository.save(p1);

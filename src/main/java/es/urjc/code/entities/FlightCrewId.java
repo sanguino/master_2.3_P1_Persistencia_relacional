@@ -3,12 +3,19 @@ package es.urjc.code.entities;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+/**
+ * Embeddable FlightCrewId.
+ *
+ * @author Miguel G. Sanguino
+ */
+
 @Embeddable
 public class FlightCrewId implements Serializable {
     private Long flightId;
     private Long crewMemberId;
 
-    public FlightCrewId() { }
+    public FlightCrewId() {
+    }
 
     public FlightCrewId(Long flightId, Long crewMemberId) {
         this.flightId = flightId;

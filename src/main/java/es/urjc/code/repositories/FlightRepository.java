@@ -1,19 +1,16 @@
 package es.urjc.code.repositories;
 
 import es.urjc.code.dtos.FlightCodeCompanyDTO;
-import es.urjc.code.dtos.PlaneMechanicDTO;
-import es.urjc.code.entities.Airport;
 import es.urjc.code.entities.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
  * Repositorio para Flight.
  *
- *  @author Miguel G. Sanguino
+ * @author Miguel G. Sanguino
  */
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 

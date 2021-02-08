@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Repositorio para Mechanic.
  *
- *  @author Miguel G. Sanguino
+ * @author Miguel G. Sanguino
  */
 public interface MechanicRepository extends JpaRepository<Mechanic, Long> {
 

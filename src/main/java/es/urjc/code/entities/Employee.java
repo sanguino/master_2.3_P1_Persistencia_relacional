@@ -3,7 +3,7 @@ package es.urjc.code.entities;
 import javax.persistence.*;
 
 /**
- * Entity Employee.
+ * Abstract Employee.
  *
  * @author Miguel G. Sanguino
  */

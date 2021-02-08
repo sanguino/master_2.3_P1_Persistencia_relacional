@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Repositorio para Plane.
  *
- *  @author Miguel G. Sanguino
+ * @author Miguel G. Sanguino
  */
 public interface PlaneRepository extends JpaRepository<Plane, Long> {
 

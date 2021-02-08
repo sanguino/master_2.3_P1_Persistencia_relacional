@@ -1,10 +1,5 @@
 package es.urjc.code.dtos;
 
-import es.urjc.code.entities.Mechanic;
-
-import java.time.Duration;
-import java.util.List;
-
 /**
  * @author Miguel G. Sanguino
  */
