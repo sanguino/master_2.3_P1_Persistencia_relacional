@@ -33,7 +33,7 @@ public class Flight {
 
     private Duration duration;
 
-    @OneToMany(mappedBy = "flight", orphanRemoval = true)
+    @OneToMany(mappedBy = "flight", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<FlightCrew> crew;
 
 

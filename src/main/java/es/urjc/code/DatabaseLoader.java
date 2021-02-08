@@ -43,6 +43,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private FlightCrewRepository flightCrewRepository;
+
     @Override
     public void run(String... args) throws ParseException {
 
@@ -66,11 +69,6 @@ public class DatabaseLoader implements CommandLineRunner {
         mechanicRepository.save(m2);
         mechanicRepository.save(m3);
 
-        CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
-        CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
-        crewMemberRepository.save(c1);
-        crewMemberRepository.save(c2);
-
         Flight f1 = new Flight("LH4323", "Lufthansa", p1, muc, mad, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(12));
         Flight f2 = new Flight("IB9851", "Iberia", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 19, 06, 30), Duration.ofHours(2).plusMinutes(35));
         Flight f3 = new Flight("LH5892", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 12, 30), Duration.ofHours(2).plusMinutes(56));
@@ -78,12 +76,27 @@ public class DatabaseLoader implements CommandLineRunner {
         Flight f5 = new Flight("LH2564", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 07, 30), Duration.ofHours(2).plusMinutes(3));
         Flight f6 = new Flight("LH3855", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 21, 06, 30), Duration.ofHours(2).plusMinutes(23));
 
+        flightRepository.save(f1);
+        flightRepository.save(f2);
+        flightRepository.save(f3);
+        flightRepository.save(f4);
+        flightRepository.save(f5);
+        flightRepository.save(f6);
+
+        CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
+        CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
+
+        crewMemberRepository.save(c1);
+        crewMemberRepository.save(c2);
+
         List<FlightCrew> crewList = new ArrayList<>();
         FlightCrew fxc1 = new FlightCrew(f1, c1);
         FlightCrew fxc2 = new FlightCrew(f1, c2);
-
         crewList.add(fxc1);
         crewList.add(fxc2);
+
+        flightCrewRepository.save(fxc1);
+        flightCrewRepository.save(fxc2);
 
         f1.setCrew(crewList);
         f2.setCrew(crewList);
