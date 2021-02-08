@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -214,13 +213,12 @@ public class DatabaseLoader implements CommandLineRunner {
 
 
         // Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó.
-        List<CrewMember> crewMembers = crewMemberRepository.findByCode("uj87fn");
+        CrewMember crewUJ87FN = crewMemberRepository.findTopByCode("uj87fn");
         System.out.println("Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó:");
         System.out.println("----------------------------------------");
-        List<CrewFlightsDTO> crewFlightsDTOS = crewMembers.stream().map( (CrewMember cm) -> {
-            return new CrewFlightsDTO(cm.getCode(), cm.getFlights());
-        }).collect(toList());;
-        printData(crewFlightsDTOS);
+        CrewCitiesDTO crewCitiesDTO = new CrewCitiesDTO(crewUJ87FN.getCode(), crewUJ87FN.getFlights());
+        printData(crewCitiesDTO);
+
     }
 
 
@@ -235,6 +233,11 @@ public class DatabaseLoader implements CommandLineRunner {
         for (Object p : data.values()) {
             System.out.println(p);
         }
+        System.out.println();
+    }
+
+    private static void printData(Object data) {
+        System.out.println(data);
         System.out.println();
     }
 

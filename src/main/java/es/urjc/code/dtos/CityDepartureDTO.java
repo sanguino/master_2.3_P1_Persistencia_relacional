@@ -5,16 +5,16 @@ import java.time.LocalDateTime;
 /**
  * @author Miguel G. Sanguino
  */
-public class FlightCityDepartureDTO {
+public class CityDepartureDTO {
 
     private String city;
 
     private LocalDateTime departure;
 
-    public FlightCityDepartureDTO() {
+    public CityDepartureDTO() {
     }
 
-    public FlightCityDepartureDTO(String city, LocalDateTime departure) {
+    public CityDepartureDTO(String city, LocalDateTime departure) {
         this.city = city;
         this.departure = departure;
     }
