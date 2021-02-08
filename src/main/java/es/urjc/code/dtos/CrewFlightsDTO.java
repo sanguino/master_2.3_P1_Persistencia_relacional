@@ -18,7 +18,7 @@ public class CrewFlightsDTO {
 
     private long flightsTotal;
 
-    private long durationTotal;
+    private Duration durationTotal;
 
     public CrewFlightsDTO() {
     }
@@ -27,7 +27,7 @@ public class CrewFlightsDTO {
         this.name = name;
         this.surName = surName;
         this.flightsTotal = flightsTotal;
-        this.durationTotal = durationTotal;
+        this.durationTotal = Duration.ofMinutes(durationTotal);
     }
 
     public String getName() {
@@ -54,11 +54,11 @@ public class CrewFlightsDTO {
         this.flightsTotal = flightsTotal;
     }
 
-    public long getDurationTotal() {
+    public Duration getDurationTotal() {
         return durationTotal;
     }
 
-    public void setDurationTotal(long durationTotal) {
+    public void setDurationTotal(Duration durationTotal) {
         this.durationTotal = durationTotal;
     }
 
@@ -68,7 +68,7 @@ public class CrewFlightsDTO {
                 "name='" + name + '\'' +
                 ", surName='" + surName + '\'' +
                 ", flightsTotal=" + flightsTotal +
-                ", durationTotal=" + durationTotal +
+                ", durationTotal=" + durationTotal.toHours() + "h " + durationTotal.toMinutesPart() + "m" +
                 '}';
     }
 }
