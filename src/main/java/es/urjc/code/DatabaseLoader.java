@@ -84,26 +84,51 @@ public class DatabaseLoader implements CommandLineRunner {
         flightRepository.save(f6);
 
         CrewMember c1 = new CrewMember("hy76rf", "John", "Smith", "Captain", "Lufthansa");
-        CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Lufthansa");
+        CrewMember c2 = new CrewMember("uj87fn", "Jane", "Brown", "Co-pilot", "Iberia");
+        CrewMember c3 = new CrewMember("tk52fn", "Will", "Smith", "pilot", "Air Europa");
+        CrewMember c4 = new CrewMember("ws18fn", "Mario", "Cart", "Co-pilot", "Lufthansa");
+        CrewMember c5 = new CrewMember("pd27fn", "Xena", "Warrior", "pilot", "Iberia");
 
         crewMemberRepository.save(c1);
         crewMemberRepository.save(c2);
+        crewMemberRepository.save(c3);
+        crewMemberRepository.save(c4);
+        crewMemberRepository.save(c5);
 
-        List<FlightCrew> crewList = new ArrayList<>();
-        FlightCrew fxc1 = new FlightCrew(f1, c1);
-        FlightCrew fxc2 = new FlightCrew(f1, c2);
-        crewList.add(fxc1);
-        crewList.add(fxc2);
+        FlightCrew f1c1 = new FlightCrew(f1, c1);
+        FlightCrew f1c2 = new FlightCrew(f1, c2);
+        FlightCrew f2c1 = new FlightCrew(f2, c3);
+        FlightCrew f2c2 = new FlightCrew(f2, c4);
+        FlightCrew f3c1 = new FlightCrew(f3, c1);
+        FlightCrew f3c2 = new FlightCrew(f3, c5);
+        FlightCrew f4c1 = new FlightCrew(f4, c2);
+        FlightCrew f4c2 = new FlightCrew(f4, c5);
+        FlightCrew f5c1 = new FlightCrew(f5, c3);
+        FlightCrew f5c2 = new FlightCrew(f5, c4);
+        FlightCrew f6c1 = new FlightCrew(f6, c4);
+        FlightCrew f6c2 = new FlightCrew(f6, c2);
 
-        flightCrewRepository.save(fxc1);
-        flightCrewRepository.save(fxc2);
 
-        f1.setCrew(crewList);
-        f2.setCrew(crewList);
-        f3.setCrew(crewList);
-        f4.setCrew(crewList);
-        f5.setCrew(crewList);
-        f6.setCrew(crewList);
+        flightCrewRepository.save(f1c1);
+        flightCrewRepository.save(f1c2);
+        flightCrewRepository.save(f2c1);
+        flightCrewRepository.save(f2c2);
+        flightCrewRepository.save(f3c1);
+        flightCrewRepository.save(f3c2);
+        flightCrewRepository.save(f4c1);
+        flightCrewRepository.save(f4c2);
+        flightCrewRepository.save(f5c1);
+        flightCrewRepository.save(f5c2);
+        flightCrewRepository.save(f6c1);
+        flightCrewRepository.save(f6c2);
+
+
+        f1.setCrew(Arrays.asList(f1c1, f1c2));
+        f2.setCrew(Arrays.asList(f2c1, f2c2));
+        f3.setCrew(Arrays.asList(f3c1, f3c2));
+        f4.setCrew(Arrays.asList(f4c1, f4c2));
+        f5.setCrew(Arrays.asList(f5c1, f5c2));
+        f6.setCrew(Arrays.asList(f6c1, f6c2));
 
         flightRepository.save(f1);
         flightRepository.save(f2);
@@ -193,7 +218,6 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó:");
         System.out.println("----------------------------------------");
         List<CrewFlightsDTO> crewFlightsDTOS = crewMembers.stream().map( (CrewMember cm) -> {
-            printData(cm.getFlights());
             return new CrewFlightsDTO(cm.getCode(), cm.getFlights());
         }).collect(toList());;
         printData(crewFlightsDTOS);

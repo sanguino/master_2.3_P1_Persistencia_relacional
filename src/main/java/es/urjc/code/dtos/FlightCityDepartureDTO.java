@@ -7,31 +7,39 @@ import java.time.LocalDateTime;
  */
 public class FlightCityDepartureDTO {
 
-    private String flightCity;
+    private String city;
 
-    private LocalDateTime flightDateTime;
+    private LocalDateTime departure;
 
     public FlightCityDepartureDTO() {
     }
 
-    public FlightCityDepartureDTO(String flightCity, LocalDateTime flightDateTime) {
-        this.flightCity = flightCity;
-        this.flightDateTime = flightDateTime;
+    public FlightCityDepartureDTO(String city, LocalDateTime departure) {
+        this.city = city;
+        this.departure = departure;
     }
 
-    public String getFlightCity() {
-        return flightCity;
+    public String getCity() {
+        return city;
     }
 
-    public void setFlightCity(String flightCity) {
-        this.flightCity = flightCity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public LocalDateTime getFlightDateTime() {
-        return flightDateTime;
+    public LocalDateTime getDeparture() {
+        return departure;
     }
 
-    public void setFlightDateTime(LocalDateTime flightDateTime) {
-        this.flightDateTime = flightDateTime;
+    public void setDeparture(LocalDateTime departure) {
+        this.departure = departure;
+    }
+
+    @Override
+    public String toString() {
+        return "FlightCityDepartureDTO{" +
+                "flightCity='" + city + '\'' +
+                ", flightDateTime=" + departure +
+                '}';
     }
 }
