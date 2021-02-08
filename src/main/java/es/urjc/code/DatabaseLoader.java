@@ -1,9 +1,6 @@
 package es.urjc.code;
 
-import es.urjc.code.dtos.FlightCodeCompanyDTO;
-import es.urjc.code.dtos.MechanicNameSurnameDTO;
-import es.urjc.code.dtos.PlaneMechanicDTO;
-import es.urjc.code.dtos.PlaneMechanicsListDTO;
+import es.urjc.code.dtos.*;
 import es.urjc.code.entities.*;
 import es.urjc.code.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Cargador de la BD y ejemplos de consulta.
@@ -104,6 +104,7 @@ public class DatabaseLoader implements CommandLineRunner {
         Review r3 = new Review(p2, LocalDate.of(2018, Month.DECEMBER, 23), LocalDate.of(2018, Month.DECEMBER, 26), Duration.ofHours(12), m3, "landing review", "extra landing review", muc);
         Review r4 = new Review(p1, LocalDate.of(2019, Month.APRIL, 29), LocalDate.of(2019, Month.APRIL, 30), Duration.ofHours(5), m2, "avionic review", "yearly avionic review", mad);
         Review r5 = new Review(p1, LocalDate.of(2018, Month.JULY, 28), LocalDate.of(2018, Month.JULY, 31), Duration.ofHours(64), m1, "landing review", "extra landing review", muc);
+
         reviewRepository.save(r1);
         reviewRepository.save(r2);
         reviewRepository.save(r3);
@@ -175,7 +176,14 @@ public class DatabaseLoader implements CommandLineRunner {
 
 
         // Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó.
-
+        List<CrewMember> crewMembers = crewMemberRepository.findByCode("uj87fn");
+        System.out.println("Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó:");
+        System.out.println("----------------------------------------");
+        List<CrewFlightsDTO> crewFlightsDTOS = crewMembers.stream().map( (CrewMember cm) -> {
+            printData(cm.getFlights());
+            return new CrewFlightsDTO(cm.getCode(), cm.getFlights());
+        }).collect(toList());;
+        printData(crewFlightsDTOS);
     }
 
 

@@ -2,8 +2,10 @@ package es.urjc.code.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entity Crew.
@@ -18,7 +20,7 @@ public class CrewMember extends Employee{
 
     private String company;
 
-    @OneToMany(mappedBy = "crewMember", orphanRemoval = true)
+    @OneToMany(mappedBy = "crewMember", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<FlightCrew> flights;
 
     public CrewMember() {

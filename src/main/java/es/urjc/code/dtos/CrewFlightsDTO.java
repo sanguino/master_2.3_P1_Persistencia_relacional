@@ -1,6 +1,10 @@
 package es.urjc.code.dtos;
 
-import java.time.LocalDateTime;
+import es.urjc.code.entities.Flight;
+import es.urjc.code.entities.FlightCrew;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Miguel G. Sanguino
@@ -9,17 +13,19 @@ public class CrewFlightsDTO {
 
     private String crewCode;
 
-    private String flightCity;
-
-    private LocalDateTime flightDateTime;
+    private List<FlightCityDepartureDTO> flightCityDepartureDTOS;
 
     public CrewFlightsDTO() {
     }
 
-    public CrewFlightsDTO(String crewCode, String flightCity, LocalDateTime flightDateTime) {
+    public CrewFlightsDTO(String crewCode, List<FlightCrew> flightsCrew) {
         this.crewCode = crewCode;
-        this.flightCity = flightCity;
-        this.flightDateTime = flightDateTime;
+        this.flightCityDepartureDTOS = new ArrayList<>();
+        flightsCrew.forEach(flightCrew -> {
+            Flight flight = flightCrew.getFlight();
+            FlightCityDepartureDTO fcdto = new FlightCityDepartureDTO(flight.getDestinationAirport().getCity(), flight.getDepartureDateTime());
+            this.flightCityDepartureDTOS.add(fcdto);
+        });
     }
 
     public String getCrewCode() {
@@ -30,28 +36,19 @@ public class CrewFlightsDTO {
         this.crewCode = crewCode;
     }
 
-    public String getFlightCity() {
-        return flightCity;
+    public List<FlightCityDepartureDTO> getFlightCityDepartureDTOS() {
+        return flightCityDepartureDTOS;
     }
 
-    public void setFlightCity(String flightCity) {
-        this.flightCity = flightCity;
-    }
-
-    public LocalDateTime getFlightDateTime() {
-        return flightDateTime;
-    }
-
-    public void setFlightDateTime(LocalDateTime flightDateTime) {
-        this.flightDateTime = flightDateTime;
+    public void setFlightCityDepartureDTOS(List<FlightCityDepartureDTO> flightCityDepartureDTOS) {
+        this.flightCityDepartureDTOS = flightCityDepartureDTOS;
     }
 
     @Override
     public String toString() {
         return "CrewFlightsDTO{" +
                 "crewCode='" + crewCode + '\'' +
-                ", flightCity='" + flightCity + '\'' +
-                ", flightDateTime=" + flightDateTime +
+                ", flightCityDepartureDTOS=" + flightCityDepartureDTOS +
                 '}';
     }
 }

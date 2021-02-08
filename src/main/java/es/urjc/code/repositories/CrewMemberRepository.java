@@ -14,7 +14,6 @@ import java.util.List;
  */
 public interface CrewMemberRepository extends JpaRepository<CrewMember, Long> {
 
-    //@Query(value = "select new es.urjc.code.dtos.CrewFlightsDTO() from CrewMember c join Flight fc on c.id = fc.crew_id join flight f on fc.flight_id = f.id")
-    //List<CrewFlightsDTO> findFlightsOfCrewMember(String code);
+    List<CrewMember> findByCode(String code);
 
 }
