@@ -31,7 +31,7 @@ public class Flight {
 
     private LocalDateTime departureDateTime;
 
-    private Duration duration;
+    private int duration;
 
     @OneToMany(mappedBy = "flight", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<FlightCrew> crew;
@@ -40,7 +40,7 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String code, String company, Plane plane, Airport originAirport, Airport destinationAirport, LocalDateTime departureDateTime, Duration duration) {
+    public Flight(String code, String company, Plane plane, Airport originAirport, Airport destinationAirport, LocalDateTime departureDateTime, int duration) {
         this.code = code;
         this.company = company;
         this.plane = plane;
@@ -106,11 +106,11 @@ public class Flight {
         this.departureDateTime = departureDateTime;
     }
 
-    public Duration getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -132,7 +132,7 @@ public class Flight {
                 ", originAirport=" + originAirport +
                 ", destinationAirport=" + destinationAirport +
                 ", departureDateTime=" + departureDateTime.format(DateTimeFormatter.ISO_DATE_TIME) +
-                ", duration=" + duration.toHours() + "h " + duration.toMinutesPart() + "m" +
+                ", duration=" + duration +
                 //", crew=" + crew +
                 '}';
     }

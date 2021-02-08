@@ -17,10 +17,10 @@ public class FlightCodeCompanyDTO {
     public FlightCodeCompanyDTO() {
     }
 
-    public FlightCodeCompanyDTO(String code, String company, LocalDateTime departure, Duration duration) {
+    public FlightCodeCompanyDTO(String code, String company, LocalDateTime departure, int duration) {
         this.code = code;
         this.company = company;
-        this.landing = departure.plus(duration);
+        this.landing = departure.plus(Duration.ofMinutes(duration));
     }
 
     public String getCode() {

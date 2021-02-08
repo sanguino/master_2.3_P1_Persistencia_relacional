@@ -68,12 +68,12 @@ public class DatabaseLoader implements CommandLineRunner {
         mechanicRepository.save(m2);
         mechanicRepository.save(m3);
 
-        Flight f1 = new Flight("LH4323", "Lufthansa", p1, muc, mad, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), Duration.ofHours(2).plusMinutes(12));
-        Flight f2 = new Flight("IB9851", "Iberia", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 19, 06, 30), Duration.ofHours(2).plusMinutes(35));
-        Flight f3 = new Flight("LH5892", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 12, 30), Duration.ofHours(2).plusMinutes(56));
-        Flight f4 = new Flight("UX3633", "Air Europa", p1, bcn, muc, LocalDateTime.of(2016, Month.APRIL, 20, 18, 00), Duration.ofHours(1).plusMinutes(48));
-        Flight f5 = new Flight("LH2564", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 07, 30), Duration.ofHours(2).plusMinutes(3));
-        Flight f6 = new Flight("LH3855", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 21, 06, 30), Duration.ofHours(2).plusMinutes(23));
+        Flight f1 = new Flight("LH4323", "Lufthansa", p1, muc, mad, LocalDateTime.of(2016, Month.APRIL, 20, 06, 30), 132);//Duration.ofHours(2).plusMinutes(12));
+        Flight f2 = new Flight("IB9851", "Iberia", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 19, 06, 30), 155);//Duration.ofHours(2).plusMinutes(35));
+        Flight f3 = new Flight("LH5892", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 12, 30), 176);//Duration.ofHours(2).plusMinutes(56));
+        Flight f4 = new Flight("UX3633", "Air Europa", p1, bcn, muc, LocalDateTime.of(2016, Month.APRIL, 20, 18, 00), 108);//Duration.ofHours(1).plusMinutes(48));
+        Flight f5 = new Flight("LH2564", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 20, 07, 30), 123);//Duration.ofHours(2).plusMinutes(3));
+        Flight f6 = new Flight("LH3855", "Lufthansa", p1, mad, muc, LocalDateTime.of(2016, Month.APRIL, 21, 06, 30), 143);//Duration.ofHours(2).plusMinutes(23));
 
         flightRepository.save(f1);
         flightRepository.save(f2);
@@ -219,6 +219,11 @@ public class DatabaseLoader implements CommandLineRunner {
         CrewCitiesDTO crewCitiesDTO = new CrewCitiesDTO(crewUJ87FN.getCode(), crewUJ87FN.getFlights());
         printData(crewCitiesDTO);
 
+        // Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos.
+        List<CrewFlightsDTO> crewFlightsDTOS = crewMemberRepository.findAllFlightsAndDuration();
+        System.out.println("Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos:");
+        System.out.println("----------------------------------------");
+        printData(crewFlightsDTOS);
     }
 
 
