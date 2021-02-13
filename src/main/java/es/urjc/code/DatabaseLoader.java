@@ -118,6 +118,12 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("----------------------------------------");
         printData(crewFlightsDTOS);
 
+        // P2: Para cada avión, mostrar el nombre y apellidos de los mecánicos responsables de sus revisiones.
+        List<MechanicsOfPlaneInterface> mechanicsOfPlaneInterfaces = planeRepository.findAllMechanicsOfaPlane();
+        System.out.println("P2: Para cada avión, mostrar el nombre y apellidos de los mecánicos responsables de sus revisiones:");
+        System.out.println("----------------------------------------");
+        List<MechanicsOfPlaneDTO> mechanicsOfPlaneDTOS = mechanicsOfPlaneInterfaces.stream().map(i -> new MechanicsOfPlaneDTO(i.getPlate(), i.getName(), i.getSurName())).collect(Collectors.toList());
+        printData(mechanicsOfPlaneDTOS);
 
         // P2: Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos.
         List<CrewFlightsInterface> crewFlightsInterfaces = crewMemberRepository.findAllFlightsAndDurationJSON();

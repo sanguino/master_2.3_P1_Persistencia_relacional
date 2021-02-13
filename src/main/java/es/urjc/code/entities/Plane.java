@@ -26,6 +26,8 @@ public class Plane {
 
     private Duration flightHours;
 
+    private String reviews;
+
     public Plane() {
     }
 
