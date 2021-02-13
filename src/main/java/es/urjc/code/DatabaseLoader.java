@@ -42,6 +42,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     private FlightCrewRepository flightCrewRepository;
 
+    @Autowired
+    private ProvinciaRepository provinciaRepository;
+
     @Override
     public void run(String... args) throws ParseException {
 
@@ -131,6 +134,12 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("----------------------------------------");
         List<CrewFlightsDTO> crewFlightsDTOSJSON = crewFlightsInterfaces.stream().map(i -> new CrewFlightsDTO(i.getName(), i.getSurName(), i.getFlightsTotal(), i.getDurationTotal())).collect(Collectors.toList());
         printData(crewFlightsDTOSJSON);
+
+        // Recupera provincias
+        List<Provincia> provincias = provinciaRepository.findAll();
+        System.out.println("Provincias con findAll():");
+        System.out.println("----------------------------------------");
+        printData(provincias);
     }
 
     private static void printData(List data) {
