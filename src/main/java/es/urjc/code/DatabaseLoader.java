@@ -8,14 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 import java.text.ParseException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Cargador de la BD, ejemplos de consulta y consultas de la practica.
@@ -102,27 +98,34 @@ public class DatabaseLoader implements CommandLineRunner {
         printData(planeMechanicsListDTOS);
 
 
-        // Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora.
+        // P1: Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora.
         List<FlightCodeCompanyDTO> flightCodeCompanyDTOS = flightRepository.findFlightsLandedInCityAndDate("Munich", "2016-04-20");
-        System.out.println("Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora:");
+        System.out.println("P1: Dado el nombre de una ciudad y una fecha, listado de los vuelos que han aterrizado (destino) en los aeropuertos de esa ciudad en esa fecha, ordenados por hora:");
         System.out.println("----------------------------------------");
         printData(flightCodeCompanyDTOS);
 
 
-        // Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó.
+        // P1: Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó.
         CrewMember crewUJ87FN = crewMemberRepository.findTopByCode("uj87fn");
-        System.out.println("Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó:");
+        System.out.println("P1: Dado el código de empleado de un tripulante, mostrar su nombre y apellidos y las ciudades desde las que ha despegado junto con la fecha en que despegó:");
         System.out.println("----------------------------------------");
         CrewCitiesDTO crewCitiesDTO = new CrewCitiesDTO(crewUJ87FN.getCode(), crewUJ87FN.getFlights());
         printData(crewCitiesDTO);
 
-        // Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos.
+        // P1: Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos.
         List<CrewFlightsDTO> crewFlightsDTOS = crewMemberRepository.findAllFlightsAndDuration();
-        System.out.println("Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos:");
+        System.out.println("P1: Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos:");
         System.out.println("----------------------------------------");
         printData(crewFlightsDTOS);
-    }
 
+
+        // P2: Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos.
+        List<CrewFlightsInterface> crewFlightsInterfaces = crewMemberRepository.findAllFlightsAndDurationJSON();
+        System.out.println("P2: Para cada tripulante, mostrar su nombre y apellidos junto con su número total de vuelos y la suma de horas de estos:");
+        System.out.println("----------------------------------------");
+        List<CrewFlightsDTO> crewFlightsDTOSJSON = crewFlightsInterfaces.stream().map(i -> new CrewFlightsDTO(i.getName(), i.getSurName(), i.getFlightsTotal(), i.getDurationTotal())).collect(Collectors.toList());
+        printData(crewFlightsDTOSJSON);
+    }
 
     private static void printData(List data) {
         for (Object p : data) {
