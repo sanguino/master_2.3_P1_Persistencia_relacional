@@ -35,11 +35,13 @@ public class Flight {
     @OneToMany(mappedBy = "flight", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<FlightCrew> crew;
 
+    private String crewListId;
+
 
     public Flight() {
     }
 
-    public Flight(String code, String company, Plane plane, Airport originAirport, Airport destinationAirport, LocalDateTime departureDateTime, int duration) {
+    public Flight(String code, String company, Plane plane, Airport originAirport, Airport destinationAirport, LocalDateTime departureDateTime, int duration, String crewListId) {
         this.code = code;
         this.company = company;
         this.plane = plane;
@@ -47,6 +49,7 @@ public class Flight {
         this.destinationAirport = destinationAirport;
         this.departureDateTime = departureDateTime;
         this.duration = duration;
+        this.crewListId = crewListId;
     }
 
     public long getId() {
@@ -121,6 +124,14 @@ public class Flight {
         this.crew = crew;
     }
 
+    public String getCrewListId() {
+        return crewListId;
+    }
+
+    public void setCrewListId(String crewListId) {
+        this.crewListId = crewListId;
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
@@ -130,9 +141,10 @@ public class Flight {
                 ", plane=" + plane +
                 ", originAirport=" + originAirport +
                 ", destinationAirport=" + destinationAirport +
-                ", departureDateTime=" + departureDateTime.format(DateTimeFormatter.ISO_DATE_TIME) +
+                ", departureDateTime=" + departureDateTime +
                 ", duration=" + duration +
-                //", crew=" + crew +
+                ", crew=" + crew +
+                ", crewListId='" + crewListId + '\'' +
                 '}';
     }
 }
