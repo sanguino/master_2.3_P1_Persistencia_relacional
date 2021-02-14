@@ -143,7 +143,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
         // P2: Listado mostrando, para cada comunidad autónoma, su número de provincias (Ceuta y Melilla se consideran como parte de la comunidad autónoma “sin comunidad”).
         List<ComunidadesNumProvincias> proviciasNumPorComunidad = provinciaRepository.proviciasNumPorComunidad();
-        System.out.println("P2: P2: Listado mostrando, para cada comunidad autónoma, su número de provincias (Ceuta y Melilla se consideran como parte de la comunidad autónoma “sin comunidad”):");
+        System.out.println("P2: Listado mostrando, para cada comunidad autónoma, su número de provincias (Ceuta y Melilla se consideran como parte de la comunidad autónoma “sin comunidad”):");
         System.out.println("----------------------------------------");
         printData(proviciasNumPorComunidad);
     }
