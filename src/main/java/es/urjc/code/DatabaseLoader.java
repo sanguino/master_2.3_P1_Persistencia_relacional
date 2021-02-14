@@ -140,6 +140,12 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("P2: Provincias con findAll():");
         System.out.println("----------------------------------------");
         printData(provincias);
+
+        // P2: Listado mostrando, para cada comunidad autónoma, su número de provincias (Ceuta y Melilla se consideran como parte de la comunidad autónoma “sin comunidad”).
+        List<ComunidadesNumProvincias> proviciasNumPorComunidad = provinciaRepository.proviciasNumPorComunidad();
+        System.out.println("P2: P2: Listado mostrando, para cada comunidad autónoma, su número de provincias (Ceuta y Melilla se consideran como parte de la comunidad autónoma “sin comunidad”):");
+        System.out.println("----------------------------------------");
+        printData(proviciasNumPorComunidad);
     }
 
     private static void printData(List data) {
