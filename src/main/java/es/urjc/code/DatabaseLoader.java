@@ -135,9 +135,9 @@ public class DatabaseLoader implements CommandLineRunner {
         List<CrewFlightsDTO> crewFlightsDTOSJSON = crewFlightsInterfaces.stream().map(i -> new CrewFlightsDTO(i.getName(), i.getSurName(), i.getFlightsTotal(), i.getDurationTotal())).collect(Collectors.toList());
         printData(crewFlightsDTOSJSON);
 
-        // Recupera provincias
+        // P2: Listado de los datos de todas las provincias.
         List<Provincia> provincias = provinciaRepository.findAll();
-        System.out.println("Provincias con findAll():");
+        System.out.println("P2: Provincias con findAll():");
         System.out.println("----------------------------------------");
         printData(provincias);
     }
